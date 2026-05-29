@@ -146,6 +146,48 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // =========================
   if (interaction.isButton()) {
 
+    // GESTION DES INSCRIPTIONS (BOUTONS SOUS LE FORUM) - PLACÉ EN PREMIER RECOURS
+    if (interaction.customId.startsWith("presence_")) {
+      await interaction.deferUpdate();
+
+      const message = interaction.message;
+      const embed = message.embeds[0];
+      if (!embed) return;
+
+      let accepted = embed.fields[0].value === "*Personne pour l'instant*" ? [] : embed.fields[0].value.split("\n");
+      let declined = embed.fields[1].value === "*Personne pour l'instant*" ? [] : embed.fields[1].value.split("\n");
+      let tentative = embed.fields[2].value === "*Personne pour l'instant*" ? [] : embed.fields[2].value.split("\n");
+
+      const userTag = `• ${interaction.user.username}`;
+
+      accepted = accepted.filter(u => u !== userTag);
+      declined = declined.filter(u => u !== userTag);
+      tentative = tentative.filter(u => u !== userTag);
+
+      if (interaction.customId === "presence_accept") accepted.push(userTag);
+      if (interaction.customId === "presence_decline") declined.push(userTag);
+      if (interaction.customId === "presence_tentative") tentative.push(userTag);
+
+      const acceptedValue = accepted.length > 0 ? accepted.join("\n") : "*Personne pour l'instant*";
+      const declinedValue = declined.length > 0 ? declined.join("\n") : "*Personne pour l'instant*";
+      const tentativeValue = tentative.length > 0 ? tentative.join("\n") : "*Personne pour l'instant*";
+
+      const updatedEmbed = {
+        title: embed.title,
+        color: embed.color,
+        fields: [
+          { name: `✅ Accepté (${accepted.length})`, value: acceptedValue, inline: true },
+          { name: `❌ Pas dispo (${declined.length})`, value: declinedValue, inline: true },
+          { name: `❓ Tentative (${tentative.length})`, value: tentativeValue, inline: true }
+        ],
+        image: embed.image,
+        footer: embed.footer
+      };
+
+      await message.edit({ embeds: [updatedEmbed] });
+      return;
+    }
+
     // CREATE RESERVATION
     if (interaction.customId === "create_reservation") {
       await interaction.deferReply({ flags: 64 });
@@ -374,7 +416,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         .setCustomId("reservation_comment")
         .setLabel("Commentaire (Optionnel, mettez '/' si vide)")
         .setStyle(TextInputStyle.Paragraph)
-        .setPlaceholder("Ex: Précisions, retard, matériel nécessaire...")
+        .setPlaceholder("Ex: Merci de laisser les places dispo, recherche niveau X minimum, ...")
         .setRequired(true);
 
       const row = new ActionRowBuilder().addComponents(input);
@@ -488,7 +530,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
       return;
     }
 
-    // COMMENT MODAL (Étape finale et envoi au Forum)
+    // COMMENT MODAL (Création finale sur le Forum)
     if (interaction.customId === "comment_modal") {
       const comment = interaction.fields.getTextInputValue("reservation_comment");
       const data = reservationCache[interaction.user.id];
@@ -573,14 +615,37 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         const messageContent = `👤 Réservation faite par : <@${interaction.user.id}>
 
+${data.teamName ? `👥 Équipe : ${data.teamName}\n` : ""}${data.enemyTeam ? `⚔️ Adversaire : ${data.enemyTeam}\n` : ""}
 📝 Commentaire :
 *${data.comment}*`;
 
+        // Construction de l'embed de présence initial
+        const presenceEmbed = {
+          title: "📊 Présence Session",
+          color: 0xf1c40f,
+          fields: [
+            { name: "✅ Accepté (0)", value: "*Personne pour l'instant*", inline: true },
+            { name: "❌ Pas dispo (0)", value: "*Personne pour l'instant*", inline: true },
+            { name: "❓ Tentative (0)", value: "*Personne pour l'instant*", inline: true }
+          ],
+          image: { url: randomGif },
+          footer: { text: `Créé par ${interaction.user.username}` }
+        };
+
+        // Construction de la ligne physique de boutons sous le forum
+        const presenceRow = new ActionRowBuilder().addComponents(
+          new ButtonBuilder().setCustomId("presence_accept").setEmoji("✅").setStyle(ButtonStyle.Secondary),
+          new ButtonBuilder().setCustomId("presence_decline").setEmoji("❌").setStyle(ButtonStyle.Secondary),
+          new ButtonBuilder().setCustomId("presence_tentative").setEmoji("❓").setStyle(ButtonStyle.Secondary)
+        );
+
+        // Publication finale
         const thread = await forum.threads.create({
           name: threadName,
           message: {
             content: messageContent,
-            embeds: [{ image: { url: randomGif } }]
+            embeds: [presenceEmbed],
+            components: [presenceRow]
           }
         });
 
@@ -600,17 +665,14 @@ client.on(Events.InteractionCreate, async (interaction) => {
           );
         }
 
-        // On affiche le message de succès final
         await interaction.editReply({
           content: "✅ Réservation créée avec succès avec votre commentaire !",
           components: []
         });
 
-        // On enregistre cette dernière interaction pour qu'elle soit aussi effacée
         if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
         userReplies[interaction.user.id].push(interaction);
 
-        // Nettoyage complet (incluant le message de succès) après 3 secondes
         setTimeout(async () => {
           try {
             const replies = userReplies[interaction.user.id] || [];

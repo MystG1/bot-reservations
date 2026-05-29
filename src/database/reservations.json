@@ -64,5 +64,203 @@
     "slot": "19:20",
     "threadId": "1509799993220010115",
     "createdAt": "2026-05-29T06:06:08.994Z"
+  },
+  {
+    "id": 1780060389604,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-10-04",
+    "slot": "17:20",
+    "threadId": "1509907435480158289",
+    "createdAt": "2026-05-29T13:13:09.344Z"
+  },
+  {
+    "id": 1780060389922,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-10-04",
+    "slot": "18:00",
+    "threadId": "1509907435480158289",
+    "createdAt": "2026-05-29T13:13:09.345Z"
+  },
+  {
+    "id": 1780060483577,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-03",
+    "slot": "23:20",
+    "threadId": "1509907834781962331",
+    "createdAt": "2026-05-29T13:14:43.140Z"
+  },
+  {
+    "id": 1780060483936,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-03",
+    "slot": "22:40",
+    "threadId": "1509907834781962331",
+    "createdAt": "2026-05-29T13:14:43.141Z"
+  },
+  {
+    "id": 1780060598644,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-05",
+    "slot": "23:20",
+    "threadId": "1509908317017866290",
+    "createdAt": "2026-05-29T13:16:38.105Z"
+  },
+  {
+    "id": 1780060598824,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-05",
+    "slot": "22:40",
+    "threadId": "1509908317017866290",
+    "createdAt": "2026-05-29T13:16:38.106Z"
+  },
+  {
+    "id": 1780060652987,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "Entraînement équipe",
+    "teamName": "test 3",
+    "date": "2026-06-03",
+    "slot": "22:40",
+    "threadId": "1509908546295435314",
+    "createdAt": "2026-05-29T13:17:32.859Z"
+  },
+  {
+    "id": 1780060653267,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "Entraînement équipe",
+    "teamName": "test 3",
+    "date": "2026-06-03",
+    "slot": "23:20",
+    "threadId": "1509908546295435314",
+    "createdAt": "2026-05-29T13:17:32.860Z"
+  },
+  {
+    "id": 1780061021905,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-05-29",
+    "slot": "16:00",
+    "threadId": "1509910094526288042",
+    "createdAt": "2026-05-29T13:23:41.888Z"
+  },
+  {
+    "id": 1780061022363,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-05-29",
+    "slot": "16:40",
+    "threadId": "1509910094526288042",
+    "createdAt": "2026-05-29T13:23:41.889Z"
+  },
+  {
+    "id": 1780061114697,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-04",
+    "slot": "23:20",
+    "threadId": "1509910482977558630",
+    "createdAt": "2026-05-29T13:25:14.485Z"
+  },
+  {
+    "id": 1780061115370,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-04",
+    "slot": "22:40",
+    "threadId": "1509910482977558630",
+    "createdAt": "2026-05-29T13:25:14.486Z"
+  },
+  {
+    "id": 1780061460772,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-05",
+    "slot": "23:20",
+    "threadId": "1509911934932226181",
+    "createdAt": "2026-05-29T13:31:00.658Z"
+  },
+  {
+    "id": 1780061461625,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-11-05",
+    "slot": "22:40",
+    "threadId": "1509911934932226181",
+    "createdAt": "2026-05-29T13:31:00.659Z"
+  },
+  {
+    "id": 1780061815075,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-05-29",
+    "slot": "16:00",
+    "threadId": "1509913419430494259",
+    "createdAt": "2026-05-29T13:36:54.575Z"
+  },
+  {
+    "id": 1780061815210,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "MIX",
+    "teamName": null,
+    "date": "2026-05-29",
+    "slot": "16:40",
+    "threadId": "1509913419430494259",
+    "createdAt": "2026-05-29T13:36:54.576Z"
+  },
+  {
+    "id": 1780062043016,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "Entraînement équipe",
+    "teamName": "sasa",
+    "date": "2026-05-30",
+    "slot": "23:20",
+    "threadId": "1509914376528859177",
+    "createdAt": "2026-05-29T13:40:42.781Z"
+  },
+  {
+    "id": 1780062043437,
+    "userId": "151738255295905793",
+    "username": "mystg1",
+    "type": "Entraînement équipe",
+    "teamName": "sasa",
+    "date": "2026-05-30",
+    "slot": "00:00",
+    "threadId": "1509914376528859177",
+    "createdAt": "2026-05-29T13:40:42.781Z"
   }
 ]
