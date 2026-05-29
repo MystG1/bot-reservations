@@ -1,20 +1,43 @@
-// Remplacez l'ancien require de sqlite3 par better-sqlite3
-const Database = require("better-sqlite3");
-const db = new Database("./reservations.db");
+const fs = require("fs");
 
-// Le reste de votre code de création de table (db.run...) reste identique !
-db.run(`
-  CREATE TABLE IF NOT EXISTS reservations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    userId TEXT,
-    username TEXT,
-    type TEXT,
-    teamName TEXT,
-    date TEXT,
-    slot TEXT,
-    threadId TEXT,
-    createdAt TEXT
-  )
-`);
+const DB_FILE = "./reservations.json";
+
+if (!fs.existsSync(DB_FILE)) {
+  fs.writeFileSync(DB_FILE, JSON.stringify([]));
+}
+
+function read() {
+  return JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
+}
+
+function write(data) {
+  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+}
+
+const db = {
+
+  run(sql, params, callback) {
+
+    const data = read();
+
+    const entry = {
+      id: Date.now(),
+      userId: params?.[0],
+      username: params?.[1],
+      type: params?.[2],
+      teamName: params?.[3],
+      date: params?.[4],
+      slot: params?.[5],
+      threadId: params?.[6],
+      createdAt: params?.[7]
+    };
+
+    data.push(entry);
+    write(data);
+
+    if (callback) callback(null);
+  }
+
+};
 
 module.exports = db;
