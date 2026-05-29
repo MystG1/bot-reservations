@@ -514,8 +514,56 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         const cuteGifs = [
           "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHoyaXppenpkanJnYmlyeW13aXY1c3IwbTZob3hoOWZteDZ3aG9xYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/IX20ivGhtfXNZsghVU/giphy.gif",
-          "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb25keHJqdHpuZ2czMTRwZnRvdWZtNWV4dm9pNHlla2RnOWt0d250dSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/NKWW55ukTMB9qNA3Cl/giphy.gif",
-          "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajF6am04dTBjczV3czFyancxdGhuNXhyYzR2MWY3Ymt3YWdzYW56NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7qDGemThdesa0mze/giphy.gif"
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb25keHJqdHpuZ2czMTRwZnRvdWZtNWV4dm9pNHlla2RnOWt0d250dSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/NKWW55ukTMB9qNA3Cl/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajF6am04dTBjczV3czFyancxdGhuNXhyYzR2MWY3Ymt3YWdzYW56NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7qDGemThdesa0mze/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGh2cHBpZnp6cTlwMzFoNThpYzQ1bDQ0amdydzNrMHNrMnVsZTN6aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wJSRkoZ8cD10Q/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd20xYjFoZ3RoNTN5a2NxNWlwdW82N2Mwa3hpYWkwNnVqcHVieDJnZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/12nfFCZA0vyrSw/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd20xYjFoZ3RoNTN5a2NxNWlwdW82N2Mwa3hpYWkwNnVqcHVieDJnZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qPCln5TSOsdRS/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YTNva2lkem13bTB6cG1ucnlsYmc0YmZpdzlzYjd2YnlvaTc4M2F4byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Z6JYXip75BeOA/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTUweTZhb2hsOXB1d2tiZHowcG1yeTh3eW1ndzBlY215cTF2MHFiayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cgC6Mx1aJtBBe/giphy.gif",
+
+  "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDh1Y2E4cXoxYnV1ajY1eGY3NmFyajZnMDVyc3ViOGo1bTM1amZ0NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6gNQv9XZUJRtGx2RHu/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Zm5tODdmaGdmc29yNnFnajRvb3Z1bHN6Nml0em43cGNjbWdqazUzeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KqOmIBTRF7RHwvGJqA/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGZ3aWxnMWQzYm14cDF5aWtydzVwMm84M2h6YTI2bm84OG9odDAwZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/iggT536JzcWrfoAfxi/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3R1cTJ6MjhhYmxmYnVsY3JsdWRscjFwcjR4a245czlscHkzYWI5aSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/35MG6KoNC3zyAkGes0/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXpvb3ZsY2dpMnNuZ28xaTY5NmR3OWwxNGhxYmltbWlteGhna21lMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/f0sATHPZHuHAq2Wj34/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NDN0c2N3enNjbHkybXpjNjR2dGtmaWloMjEwY3BtcTFkazZyY3l6YiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tCDjkAJG0ANi1k1c9K/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dnRocWU2dHFwNDk0NGVlYWtuNGxmZHptbWE5NW0waTdoNHJyaGMyaSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7aCVqXn0idWFuDnO/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzBsNDhzOWNienZ3aXVlajZkNWExODB1cm1ubHlndTh1eDA0cGdqayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/P1trdeqfQODW8/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzBsNDhzOWNienZ3aXVlajZkNWExODB1cm1ubHlndTh1eDA0cGdqayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tPgV8ceZTSxH9zG/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NG42ZHpzMmtseTBsaWc1ZW5wMG94OGxta3ZjMDBob3ltejFnNzNlZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xUPGcsI7i3oM0X0mZO/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3B6Z3pjcTFrNHJhYTJ3ZTF5dWplN3FtemN1dmhreXV0ZHBkaHVsbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/eSpjNlNWb5gIg/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTUxdjYxcml4a2R0dXU0YzBsNGJsMnFjN2E1ZndrdWc4dGJmemxreiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XknChYwfPnp04/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJydnJ6d3lkejZxYnJjM2tuYjlsdnN1MmVxaTM4aXhxaDd5dGRjYyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/JBrjufQXYk8WxhiIF5/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Zm5idXlicmF6aHA0b2lkM20xbHYyZGhrNDNwZ2pob3Nha2p2MTUyNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/JGAztg5bfsx5hHOONU/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3E1Mm1kMGJhNWg1NW9xN3dvdnY2NDluaW9wanYzdDQ0OWtuZXNzZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/DrY3GK3o3KXXAVBNc5/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGRjaTAxMmF1eHh1cGhkcmZoMGpqNDR3NGtidWNkM2l6ZGlkcWFqdSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Sr9NHwRKlsD3unMK43/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGU3NWpnYnR0a2FoNHpvbzUxYWEweng3bGRtaXB3ZXpldWcxZWJ3NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/bLFQRUZGisPJe/giphy.gif",
+
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MTRxeWZiM3Qwc3dvcG02eGVtbW10N2ZhNTh0NjE0cG1jNHpuMndvZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/UYDRhzZlbTLOg/giphy.gif"
         ];
         const randomGif = cuteGifs[Math.floor(Math.random() * cuteGifs.length)];
 
@@ -524,7 +572,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
           : `${data.teamName || data.type} - ${formattedDate} | ${firstSlot} ${secondSlot ? `- ${secondSlot}` : ''}`;
 
         const messageContent = `👤 Réservation faite par : <@${interaction.user.id}>
-        
+
 📝 Commentaire :
 *${data.comment}*`;
 
