@@ -27,14 +27,69 @@ const BUTTON_CHANNEL_ID = process.env.PANEL_CHANNEL_ID;
 const FORUM_CHANNEL_ID = process.env.FORUM_CHANNEL_ID;
 
 // ==========================================
+// BANQUE DE GIFS PAR AMBIANCE
+// ==========================================
+const GIF_THEMES = {
+  tryhard: [
+    "https://media.giphy.com/media/6gNQv9XZUJRtGx2RHu/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmIwazlsemp1eHBqM2NtYm40dnlzdTN6ZnFwMGttbzdldDFuM2VicCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/K91OXsr6lSjh5qxQBb/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2Z1NG1uY3hqN25nY2lnaWQxZ3c5NnRydHU1ZDVzd2p5dGdtaDdnaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qirT6LrQo2BOw/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGp1MDR1dm5vYzBoaG1odmYxYWliMjllN2IxMjc4Z2pxaGI3ZDgweSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2s8sU8xIUJSSY/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGExMDF0Z3hrbmY5MGdxMnUxbDBpY2RtbXlnbGsyeGh2OGdvZnJxZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/jAW1omkFeJkNSkht48/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGg4eHpxNHFiZ2szbjBvaTRsY20wMnI3cWY3bDJydWdpa2RhMWUxbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wqnkRfvYEejx69bjun/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3lud282YjB5aTRlZTI3aHBkdHY5MnhvcHZ6Y3FuYzhpbnkzZW01aiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/oOzOYcb0mQZYiNkph6/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGk3YTVtNjllaXZqeHhudm4zbTkwMXZubHh6dXZscmd0am1kcGxxZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vVJe0aiWuCkqYy3GsQ/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHZ5M3BjdHBlYW44bjd0bzJwc3F4cHNkNzZzcGlmNG1qbzc5dGVhYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/8SNHEWM66EE9WF5xUi/giphy.gif",
+    ""
+  ],
+  chill: [
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmZsd24wbXkyaGF4OTZkZGJ6NW1ldjAwY2czdGtubjF3aGI1YWM4cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XNQDgvHvDFnITnAAU5/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmZsd24wbXkyaGF4OTZkZGJ6NW1ldjAwY2czdGtubjF3aGI1YWM4cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1AE8LbiGWJHjXXjEU7/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MmdwbHQxMnY1cTI4MDdhemYwdTEwcHZjOWV1NzVuYmgzMGR6a2NqOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/fGCa0O9sogzEOTbBaP/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZDFhMndjYmFoeXJuZHkwYmp6MHhlNWx0aHQ2N2plNnZtaW1yNno4NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/6zXzFmGm2excJXpLQc/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dHU4bTJkY2RuYmM5aDRlM2twcnV5b3Axemp2cmdldzJjdXQyYmtydCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/JbVTO5me5IQLJC0xvu/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MjczbzA1eTc2Y3QwaGxnem05ZmU5d2t1dzZ4bzRyZGVwMm16cW8zdSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/LypoBlWAyjlF5J5SWV/giphy.gif",
+    ""
+  ],
+  fun: [
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcm4za3VoNXhzYzV1YjliaG45MHU2YnRraXQ5cm44d2UxNXV2cGR4bCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/13hxeOYjoTWtK8/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZmdrYmE4c3E0dWt0ejU0YzhyY2VzMDNvNTZhcjQzbXVxeDcxMXl5NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/UTIjSi97Rbq4H1AlbV/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MjgxeDFpMGdqMm1vNzk0Z3M4NGh0dDBkdHlkZ29hOXE5c2l5MWc0ayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/emLvIMJHUhO5MFeU80/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamhhbnpndGVqYnRpcTgxYzNxbWMwcWF1bTRvb2I1YjZ4NGQxZ3k4MCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/HiERcJIEURCZ56TqgZ/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW1ycGx3NTlyemE4MTVtNXdocDhiMDlmbzllZzNoc3V6N2MxOGd0ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/eMUDHPNgBJ4UpnqfmB/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dHk4cjY3MXhkY3dpengwNXQ3YXN6emkyenBlanJlbWluNzI3OTNscSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/GhCziiVAcdpKPjOHpI/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dHk4cjY3MXhkY3dpengwNXQ3YXN6emkyenBlanJlbWluNzI3OTNscSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PZdKY4pfyvZXELZ82Z/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXJpZ2d5MjgzZzNxbjRneHhjdHRkZXZqeDZ1N3MybDN0MWlhcHd2bCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RRB40Ax5BM8OdM2pMC/giphy.gif",
+    ""
+  ],
+  gaming: [
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3NmeHBxYXp3Z3NmZ3dwdmRjODB0OXk4MW0wMnI6b2tzeXdqdHVzNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPnRJgxg9bZJvtS/giphy.gif",
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGdrMGViNmMzajV1YXVydXg2enBmMjJxbnpzNDB0OXh3ZzVxeTc1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Sy2lziCOPymAbNA1NW/giphy.gif",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzMzcnhsMXRkZmcycWc2dGMzcGVpbWxja3Qyc3JheWdiM3VnMTc4MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ySYrjcQFCJICLr4kUw/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamgxbzRiN2FneGE1MTVwZnFxM2ozZnh4djBnempwZnl2aHl4eGlhNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/NKWW55ukTMB9qNA3Cl/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWs2dGRzamZtYnltbmN1aHE0azlndWl3MzBrcmhnOXdheHZzcnRoaSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/LlTYKN146VMyI/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDExaW5uYXdrZHBnNnMycTJxOGRvcW50cWo2OTdoMXpseXZvODZ3cSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/hxcqplz2tpt6ylcNwN/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MzZhOWZnc2wzaGkzdTIzOG50MjF1ZHZoczd3dmNvZXRudnpocXo3cCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/rNJlmYy4Uoxk0pqB42/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXNmNzcxZmVuNW02eG9mNjNzemV5OGl5MmY2ZXJnYThveDk4NThteiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3og0IF4QM5XYI6tF3G/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHZlNjNiMjNvd2l4OWQybDdwNGN6ZHJsejY3aTM3cHJwOTd3cmhoYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/f0sATHPZHuHAq2Wj34/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cnB6bHp6b2hsZmttZTluM3htMm83czJ4OHg4cWNsajYzY3hhOXFxMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tCDjkAJG0ANi1k1c9K/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmIybmdpazdob2dlY2d2Zms0azdsZ213cnl3ZGlhbHNpc3Q5cTM5NyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xQcUyue226cM0/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXFlZ3VoejQ0bnJiNmtydHhwZTl0eGVpOTdoZXltamdlNmx0Y3piYyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2Vuto7CotrpgAKMVoS/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnllYWptcmNqN3JyNHozcG1vbHlib2N6b240ZGh6YnZkZG5pZGZ6eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/DWo6beGJTTqFi/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnllYWptcmNqN3JyNHozcG1vbHlib2N6b240ZGh6YnZkZG5pZGZ6eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/JErAGpPtUV8ze/giphy.gif",
+    ""
+  ]
+};
+
+// ==========================================
 // SÉCURITÉ GLOBALE ANTI-CRASH
 // ==========================================
 process.on('unhandledRejection', error => {
-  console.error('⚠️ [Erreur Capturée] Rejet non géré :', error);
+  console.error('⚠️ [Erreur Capturée] Rejet non géré : ', error);
 });
 
 process.on('uncaughtException', error => {
-  console.error('⚠️ [Erreur Capturée] Exception non gérée :', error);
+  console.error('⚠️ [Erreur Capturée] Exception non gérée : ', error);
 });
 
 // =========================
@@ -146,7 +201,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // =========================
   if (interaction.isButton()) {
 
-    // GESTION DES INSCRIPTIONS (BOUTONS SOUS LE FORUM) - PLACÉ EN PREMIER RECOURS
     if (interaction.customId.startsWith("presence_")) {
       await interaction.deferUpdate();
 
@@ -176,8 +230,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
         title: embed.title,
         color: embed.color,
         fields: [
-          { name: `✅ Accepté (${accepted.length})`, value: acceptedValue, inline: true },
-          { name: `❌ Pas dispo (${declined.length})`, value: declinedValue, inline: true },
+          { name: `✅ Accepted (${accepted.length})`, value: acceptedValue, inline: true },
+          { name: `❌ Declined (${declined.length})`, value: declinedValue, inline: true },
           { name: `❓ Tentative (${tentative.length})`, value: tentativeValue, inline: true }
         ],
         image: embed.image,
@@ -188,9 +242,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
       return;
     }
 
-    // CREATE RESERVATION
     if (interaction.customId === "create_reservation") {
       await interaction.deferReply({ flags: 64 });
+
+      userReplies[interaction.user.id] = interaction;
 
       const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -207,13 +262,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
         content: "Choisis le format :",
         components: [row]
       });
-
-      if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
-      userReplies[interaction.user.id].push(interaction);
       return;
     }
 
-    // TEAM
     if (interaction.customId === "training_team") {
       const modal = new ModalBuilder()
         .setCustomId("team_name_modal")
@@ -231,29 +282,23 @@ client.on(Events.InteractionCreate, async (interaction) => {
       return interaction.showModal(modal);
     }
 
-    // MIX
     if (interaction.customId === "training_mix") {
-      await interaction.deferReply({ flags: 64 });
-
       reservationCache[interaction.user.id] = {
         type: "MIX",
         teamName: null,
         enemyTeam: null,
         selectedSlots: [],
-        comment: null
+        comment: null,
+        theme: "fun"
       };
 
-      await interaction.editReply({
+      await interaction.update({
         content: "📅 Choisis un mois :",
         components: generateMonthButtons()
       });
-
-      if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
-      userReplies[interaction.user.id].push(interaction);
       return;
     }
 
-    // ENEMY YES
     if (interaction.customId === "enemy_yes") {
       const modal = new ModalBuilder()
         .setCustomId("enemy_team_modal")
@@ -271,89 +316,130 @@ client.on(Events.InteractionCreate, async (interaction) => {
       return interaction.showModal(modal);
     }
 
-    // ENEMY NO
     if (interaction.customId === "enemy_no") {
-      await interaction.deferReply({ flags: 64 });
-
-      await interaction.editReply({
+      await interaction.update({
         content: "📅 Choisis un mois :",
         components: generateMonthButtons()
       });
-
-      if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
-      userReplies[interaction.user.id].push(interaction);
       return;
     }
 
-    // SELECT MONTH
+    // SELECT MONTH -> CORRIGÉ AVEC MAX 2 MENUS DEROULANTS (QUINZAINES) POUR EVITER LES CRASHES (5 MAX)
     if (interaction.customId.startsWith("select_day_")) {
       const parts = interaction.customId.split("_");
       const year = parseInt(parts[2]);
       const month = parseInt(parts[3]);
 
       const now = new Date();
-      const currentDate = new Date(year, month - 1);
       const daysInMonth = new Date(year, month, 0).getDate();
+      const monthLabel = new Date(year, month - 1).toLocaleString("fr-FR", { month: "long" });
 
-      const startDay =
-        currentDate.getMonth() === now.getMonth() && currentDate.getFullYear() === now.getFullYear()
-          ? now.getDate()
-          : 1;
+      const part1Options = [];
+      const part2Options = [];
 
-      const options = [];
-
-      for (let d = startDay; d <= daysInMonth; d++) {
+      for (let d = 1; d <= daysInMonth; d++) {
         const formattedDate = `${year}-${String(month).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-        const dayName = new Date(formattedDate).toLocaleDateString("fr-FR", { weekday: "long" });
+        const targetDate = new Date(formattedDate);
 
-        options.push({
-          label: `${dayName} ${d}`,
+        // Filtrer les jours passés si c'est le mois en cours
+        if (
+          year === now.getFullYear() &&
+          month === (now.getMonth() + 1) &&
+          d < now.getDate()
+        ) {
+          continue; 
+        }
+
+        let dayNameRaw = targetDate.toLocaleDateString("fr-FR", { weekday: "long" });
+        const dayName = dayNameRaw.charAt(0).toUpperCase() + dayNameRaw.slice(1);
+        const labelFormat = `${dayName} ${d} ${monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)}`;
+
+        const option = {
+          label: labelFormat,
           value: formattedDate
-        });
+        };
+
+        // Séparation propre en 2 quinzaines maximum (1 à 15, et 16+)
+        if (d <= 15) {
+          part1Options.push(option);
+        } else {
+          part2Options.push(option);
+        }
       }
 
       const rows = [];
-      rows.push(
-        new ActionRowBuilder().addComponents(
-          new StringSelectMenuBuilder()
-            .setCustomId("day_select_1")
-            .setPlaceholder("📆 Jours 1 → 25")
-            .addOptions(options.slice(0, 25))
-        )
-      );
 
-      if (options.length > 25) {
+      // Ajout du premier menu déroulant (Jours 1 à 15) s'il contient des jours valides
+      if (part1Options.length > 0) {
         rows.push(
           new ActionRowBuilder().addComponents(
             new StringSelectMenuBuilder()
-              .setCustomId("day_select_2")
-              .setPlaceholder("📆 Jours 26 → 31")
-              .addOptions(options.slice(25))
+              .setCustomId(`day_select_part_1`)
+              .setPlaceholder(`📅 Jours du 1er au 15 ${monthLabel}`)
+              .addOptions(part1Options)
+          )
+        );
+      }
+
+      // Ajout du deuxième menu déroulant (Jours 16 à fin du mois) s'il contient des jours valides
+      if (part2Options.length > 0) {
+        rows.push(
+          new ActionRowBuilder().addComponents(
+            new StringSelectMenuBuilder()
+              .setCustomId(`day_select_part_2`)
+              .setPlaceholder(`📅 Jours du 16 au ${daysInMonth} ${monthLabel}`)
+              .addOptions(part2Options)
           )
         );
       }
 
       await interaction.update({
-        content: "📆 Sélectionne un jour :",
+        content: `│ 📆 Sélectionne ton jour pour le mois de **${monthLabel.toUpperCase()}** :`,
         components: rows
       });
-
-      if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
-      userReplies[interaction.user.id].push(interaction);
       return;
     }
 
-    // SLOT SELECT
     if (interaction.customId.startsWith("slot_")) {
       const slot = interaction.customId.replace("slot_", "");
       const data = reservationCache[interaction.user.id];
 
       if (!data) return;
 
-      if (!data.selectedSlots.includes(slot)) {
-        data.selectedSlots.push(slot);
-      } else {
+      if (data.selectedSlots.includes(slot)) {
         data.selectedSlots = data.selectedSlots.filter(s => s !== slot);
+      } else {
+        if (data.selectedSlots.length >= 2) {
+          await interaction.reply({
+            content: "❌ Tu ne peux pas sélectionner plus de 2 créneaux horaires par réservation.",
+            flags: 64
+          });
+          setTimeout(async () => {
+            try { await interaction.deleteReply(); } catch (err) {}
+          }, 3000);
+          return;
+        }
+
+        if (data.selectedSlots.length === 1) {
+          const firstSlot = data.selectedSlots[0];
+          const allAvailableSlots = generateSlots(data.date).slice(0, 20);
+
+          const indexFirst = allAvailableSlots.indexOf(firstSlot);
+          const indexNew = allAvailableSlots.indexOf(slot);
+
+          if (Math.abs(indexFirst - indexNew) !== 1) {
+            await interaction.reply({
+              content: `❌ Les créneaux doivent être consécutifs (ex: ${firstSlot} et le créneau juste avant ou juste après).`,
+              flags: 64
+            });
+            setTimeout(async () => {
+              try { await interaction.deleteReply(); } catch (err) {}
+            }, 3000);
+            return;
+          }
+        }
+
+        data.selectedSlots.push(slot);
       }
 
       const slots = generateSlots(data.date);
@@ -397,7 +483,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
       return;
     }
 
-    // CONFIRM SLOTS
     if (interaction.customId === "confirm_slots") {
       const data = reservationCache[interaction.user.id];
 
@@ -408,6 +493,27 @@ client.on(Events.InteractionCreate, async (interaction) => {
         });
       }
 
+      const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder().setCustomId("theme_tryhard").setLabel("🔥 Tryhard").setStyle(ButtonStyle.Danger),
+        new ButtonBuilder().setCustomId("theme_chill").setLabel("☕ Chill").setStyle(ButtonStyle.Primary),
+        new ButtonBuilder().setCustomId("theme_fun").setLabel("🎉 Fun").setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId("theme_gaming").setLabel("😏 Choix du chef").setStyle(ButtonStyle.Secondary)
+      );
+
+      await interaction.update({
+        content: "🎬 **Étape Visuelle :** Un petit GIF pour animé ta réservation 😏 ",
+        components: [row]
+      });
+      return;
+    }
+
+    if (interaction.customId.startsWith("theme_")) {
+      const themeSelected = interaction.customId.replace("theme_", "");
+      
+      if (reservationCache[interaction.user.id]) {
+        reservationCache[interaction.user.id].theme = themeSelected;
+      }
+
       const modal = new ModalBuilder()
         .setCustomId("comment_modal")
         .setTitle("Ajouter un commentaire");
@@ -416,7 +522,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         .setCustomId("reservation_comment")
         .setLabel("Commentaire (Optionnel, mettez '/' si vide)")
         .setStyle(TextInputStyle.Paragraph)
-        .setPlaceholder("Ex: Merci de laisser les places dispo, recherche niveau X minimum, ...")
+        .setPlaceholder("Ex: Merci de laisser les places dispos, niveau souhaité, ...")
         .setRequired(true);
 
       const row = new ActionRowBuilder().addComponents(input);
@@ -430,7 +536,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // SELECT MENU
   // =========================
   if (interaction.isStringSelectMenu()) {
-    if (interaction.customId === "day_select_1" || interaction.customId === "day_select_2") {
+    // S'adapte automatiquement à l'un ou l'autre des menus de quinzaine
+    if (interaction.customId.startsWith("day_select_part_")) {
       const date = interaction.values[0];
 
       if (!reservationCache[interaction.user.id]) return;
@@ -470,8 +577,15 @@ client.on(Events.InteractionCreate, async (interaction) => {
         )
       );
 
+      const cleanDateDisplay = new Date(date).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
       await interaction.update({
-        content: `📆 ${date}\n\nChoisis tes créneaux :`,
+        content: `📆 **${cleanDateDisplay.toUpperCase()}**\n\nChoisis tes créneaux :`,
         components: rows
       });
       return;
@@ -483,7 +597,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // =========================
   if (interaction.isModalSubmit()) {
 
-    // TEAM NAME
     if (interaction.customId === "team_name_modal") {
       const teamName = interaction.fields.getTextInputValue("team_name");
 
@@ -492,7 +605,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
         teamName,
         enemyTeam: null,
         selectedSlots: [],
-        comment: null
+        comment: null,
+        theme: "fun"
       };
 
       const row = new ActionRowBuilder().addComponents(
@@ -500,18 +614,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
         new ButtonBuilder().setCustomId("enemy_no").setLabel("❌ Non").setStyle(ButtonStyle.Secondary)
       );
 
-      await interaction.reply({
+      await interaction.update({
         content: "Avez-vous déjà une équipe adverse ?",
-        components: [row],
-        flags: 64
+        components: [row]
       });
-
-      if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
-      userReplies[interaction.user.id].push(interaction);
       return;
     }
 
-    // ENEMY TEAM MODAL
     if (interaction.customId === "enemy_team_modal") {
       const enemyTeam = interaction.fields.getTextInputValue("enemy_team");
 
@@ -519,18 +628,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
         reservationCache[interaction.user.id].enemyTeam = enemyTeam;
       }
 
-      await interaction.reply({
+      await interaction.update({
         content: "📅 Choisis un mois :",
-        components: generateMonthButtons(),
-        flags: 64
+        components: generateMonthButtons()
       });
-
-      if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
-      userReplies[interaction.user.id].push(interaction);
       return;
     }
 
-    // COMMENT MODAL (Création finale sur le Forum)
     if (interaction.customId === "comment_modal") {
       const comment = interaction.fields.getTextInputValue("reservation_comment");
       const data = reservationCache[interaction.user.id];
@@ -540,7 +644,11 @@ client.on(Events.InteractionCreate, async (interaction) => {
       }
 
       data.comment = comment;
-      await interaction.deferReply({ flags: 64 });
+      
+      await interaction.update({
+        content: "⌛ Création de la réservation en cours...",
+        components: []
+      });
 
       try {
         const forum = await client.channels.fetch(FORUM_CHANNEL_ID);
@@ -554,92 +662,37 @@ client.on(Events.InteractionCreate, async (interaction) => {
           year: "numeric"
         });
 
-        const cuteGifs = [
-          "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHoyaXppenpkanJnYmlyeW13aXY1c3IwbTZob3hoOWZteDZ3aG9xYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/IX20ivGhtfXNZsghVU/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb25keHJqdHpuZ2czMTRwZnRvdWZtNWV4dm9pNHlla2RnOWt0d250dSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/NKWW55ukTMB9qNA3Cl/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajF6am04dTBjczV3czFyancxdGhuNXhyYzR2MWY3Ymt3YWdzYW56NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7qDGemThdesa0mze/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGh2cHBpZnp6cTlwMzFoNThpYzQ1bDQ0amdydzNrMHNrMnVsZTN6aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wJSRkoZ8cD10Q/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd20xYjFoZ3RoNTN5a2NxNWlwdW82N2Mwa3hpYWkwNnVqcHVieDJnZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/12nfFCZA0vyrSw/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd20xYjFoZ3RoNTN5a2NxNWlwdW82N2Mwa3hpYWkwNnVqcHVieDJnZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qPCln5TSOsdRS/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YTNva2lkem13bTB6cG1ucnlsYmc0YmZpdzlzYjd2YnlvaTc4M2F4byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Z6JYXip75BeOA/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTUweTZhb2hsOXB1d2tiZHowcG1yeTh3eW1ndzBlY215cTF2MHFiayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cgC6Mx1aJtBBe/giphy.gif",
-
-  "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDh1Y2E4cXoxYnV1ajY1eGY3NmFyajZnMDVyc3ViOGo1bTM1amZ0NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6gNQv9XZUJRtGx2RHu/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Zm5tODdmaGdmc29yNnFnajRvb3Z1bHN6Nml0em43cGNjbWdqazUzeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KqOmIBTRF7RHwvGJqA/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGZ3aWxnMWQzYm14cDF5aWtydzVwMm84M2h6YTI2bm84OG9odDAwZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/iggT536JzcWrfoAfxi/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3R1cTJ6MjhhYmxmYnVsY3JsdWRscjFwcjR4a245czlscHkzYWI5aSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/35MG6KoNC3zyAkGes0/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXpvb3ZsY2dpMnNuZ28xaTY5NmR3OWwxNGhxYmltbWlteGhna21lMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/f0sATHPZHuHAq2Wj34/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NDN0c2N3enNjbHkybXpjNjR2dGtmaWloMjEwY3BtcTFkazZyY3l6YiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tCDjkAJG0ANi1k1c9K/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dnRocWU2dHFwNDk0NGVlYWtuNGxmZHptbWE5NW0waTdoNHJyaGMyaSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7aCVqXn0idWFuDnO/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzBsNDhzOWNienZ3aXVlajZkNWExODB1cm1ubHlndTh1eDA0cGdqayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/P1trdeqfQODW8/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzBsNDhzOWNienZ3aXVlajZkNWExODB1cm1ubHlndTh1eDA0cGdqayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tPgV8ceZTSxH9zG/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NG42ZHpzMmtseTBsaWc1ZW5wMG94OGxta3ZjMDBob3ltejFnNzNlZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xUPGcsI7i3oM0X0mZO/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3B6Z3pjcTFrNHJhYTJ3ZTF5dWplN3FtemN1dmhreXV0ZHBkaHVsbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/eSpjNlNWb5gIg/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTUxdjYxcml4a2R0dXU0YzBsNGJsMnFjN2E1ZndrdWc4dGJmemxreiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XknChYwfPnp04/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJydnJ6d3lkejZxYnJjM2tuYjlsdnN1MmVxaTM4aXhxaDd5dGRjYyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/JBrjufQXYk8WxhiIF5/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Zm5idXlicmF6aHA0b2lkM20xbHYyZGhrNDNwZ2pob3Nha2p2MTUyNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/JGAztg5bfsx5hHOONU/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3E1Mm1kMGJhNWg1NW9xN3dvdnY2NDluaW9wanYzdDQ0OWtuZXNzZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/DrY3GK3o3KXXAVBNc5/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGRjaTAxMmF1eHh1cGhkcmZoMGpqNDR3NGtidWNkM2l6ZGlkcWFqdSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Sr9NHwRKlsD3unMK43/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGU3NWpnYnR0a2FoNHpvbzUxYWEweng3bGRtaXB3ZXpldWcxZWJ3NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/bLFQRUZGisPJe/giphy.gif",
-
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MTRxeWZiM3Qwc3dvcG02eGVtbW10N2ZhNTh0NjE0cG1jNHpuMndvZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/UYDRhzZlbTLOg/giphy.gif"
-        ];
-        const randomGif = cuteGifs[Math.floor(Math.random() * cuteGifs.length)];
+        const themeList = GIF_THEMES[data.theme] || GIF_THEMES["fun"];
+        const chosenGif = themeList[Math.floor(Math.random() * themeList.length)];
 
         const threadName = data.teamName && data.enemyTeam
           ? `${data.teamName} vs ${data.enemyTeam} - ${formattedDate} | ${firstSlot} ${secondSlot ? `- ${secondSlot}` : ''}`
           : `${data.teamName || data.type} - ${formattedDate} | ${firstSlot} ${secondSlot ? `- ${secondSlot}` : ''}`;
 
-        const messageContent = `👤 Réservation faite par : <@${interaction.user.id}>
+        const messageContent = `Réservation faite par : <@${interaction.user.id}>
 
 ${data.teamName ? `👥 Équipe : ${data.teamName}\n` : ""}${data.enemyTeam ? `⚔️ Adversaire : ${data.enemyTeam}\n` : ""}
 📝 Commentaire :
 *${data.comment}*`;
 
-        // Construction de l'embed de présence initial
         const presenceEmbed = {
-          title: "📊 Présence Session",
+          title: "Réservation",
           color: 0xf1c40f,
           fields: [
-            { name: "✅ Accepté (0)", value: "*Personne pour l'instant*", inline: true },
-            { name: "❌ Pas dispo (0)", value: "*Personne pour l'instant*", inline: true },
+            { name: "✅ Accepted (0)", value: "*Personne pour l'instant*", inline: true },
+            { name: "❌ Declined (0)", value: "*Personne pour l'instant*", inline: true },
             { name: "❓ Tentative (0)", value: "*Personne pour l'instant*", inline: true }
           ],
-          image: { url: randomGif },
+          image: { url: chosenGif },
           footer: { text: `Créé par ${interaction.user.username}` }
         };
 
-        // Construction de la ligne physique de boutons sous le forum
         const presenceRow = new ActionRowBuilder().addComponents(
           new ButtonBuilder().setCustomId("presence_accept").setEmoji("✅").setStyle(ButtonStyle.Secondary),
           new ButtonBuilder().setCustomId("presence_decline").setEmoji("❌").setStyle(ButtonStyle.Secondary),
           new ButtonBuilder().setCustomId("presence_tentative").setEmoji("❓").setStyle(ButtonStyle.Secondary)
         );
 
-        // Publication finale
         const thread = await forum.threads.create({
           name: threadName,
           message: {
@@ -666,28 +719,30 @@ ${data.teamName ? `👥 Équipe : ${data.teamName}\n` : ""}${data.enemyTeam ? `�
         }
 
         await interaction.editReply({
-          content: "✅ Réservation créée avec succès avec votre commentaire !",
-          components: []
+          content: "✅ **Réservation créée avec succès !** Le salon du forum a été configuré."
         });
 
-        if (!userReplies[interaction.user.id]) userReplies[interaction.user.id] = [];
-        userReplies[interaction.user.id].push(interaction);
+        const initialInteraction = userReplies[interaction.user.id];
+        if (initialInteraction) {
+          try {
+            await initialInteraction.deleteReply();
+          } catch (err) {
+            console.error("Impossible de supprimer le menu initial :", err);
+          }
+        }
 
         setTimeout(async () => {
           try {
-            const replies = userReplies[interaction.user.id] || [];
-            for (const reply of replies) {
-              try { await reply.deleteReply(); } catch (err) {}
-            }
-            delete userReplies[interaction.user.id];
+            await interaction.deleteReply();
           } catch (err) {}
+          
+          delete userReplies[interaction.user.id];
+          delete reservationCache[interaction.user.id];
         }, 3000);
 
-        delete reservationCache[interaction.user.id];
-
       } catch (error) {
-        console.error("Erreur lors de la finalisation avec commentaire :", error);
-        await interaction.editReply({ content: "❌ Une erreur est survenue lors de la création de la réservation.", components: [] });
+        console.error("Erreur lors de l'finalisation :", error);
+        await interaction.editReply({ content: "❌ Une erreur est survenue lors de la création.", components: [] });
       }
       return;
     }
